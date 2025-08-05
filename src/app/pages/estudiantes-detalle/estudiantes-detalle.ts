@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-estudiantes-detalle',
   imports: [],
   templateUrl: './estudiantes-detalle.html',
-  styleUrl: './estudiantes-detalle.css'
+  styleUrl: './estudiantes-detalle.css',
 })
-export class EstudiantesDetalle {
-
-}
+export class EstudiantesDetalle {}

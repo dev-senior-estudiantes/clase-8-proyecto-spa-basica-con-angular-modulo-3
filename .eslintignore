@@ -1,0 +1,12 @@
+# Ignorar directorios de build y distribución
+dist/
+coverage/
+node_modules/
+
+# Archivos minificados
+*.min.js
+*.min.css
+
+# Archivos de configuración
+angular.json
+karma.conf.js

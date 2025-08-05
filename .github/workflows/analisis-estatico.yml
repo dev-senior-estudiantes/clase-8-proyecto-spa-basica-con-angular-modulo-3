@@ -1,0 +1,58 @@
+name: Análisis Estático de Código
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  analisis-estatico:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+    
+    - name: Instalar dependencias
+      run: npm ci
+    
+    - name: Ejecutar ESLint
+      run: npm run lint
+      continue-on-error: true
+    
+    - name: Ejecutar Prettier Check
+      run: npm run prettier:check
+      continue-on-error: true
+    
+    - name: Verificar dependencias no usadas
+      run: npm run depcheck
+      continue-on-error: true
+    
+    - name: Ejecutar build para verificar compilación
+      run: npm run build
+    
+    - name: Ejecutar tests unitarios
+      run: npm run test:ci
+    
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      continue-on-error: true
+    
+    - name: Generar reporte de análisis
+      run: |
+        echo "## 📊 Reporte de Análisis Estático" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Build completado" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Tests ejecutados" >> $GITHUB_STEP_SUMMARY
+        echo "ℹ️ Revisa los logs para detalles de ESLint y Prettier" >> $GITHUB_STEP_SUMMARY

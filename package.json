@@ -7,6 +7,14 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix",
+    "prettier": "prettier --write \"src/**/*.{ts,html,css,scss,json}\"",
+    "prettier:check": "prettier --check \"src/**/*.{ts,html,css,scss,json}\"",
+    "depcheck": "depcheck",
+    "analyze": "npm run lint && npm run prettier:check && npm run depcheck",
+    "sonar": "sonar-scanner",
     "serve:ssr:estudiantes-app": "node dist/estudiantes-app/server/server.mjs"
   },
   "prettier": {
@@ -35,18 +43,32 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-eslint/builder": "^20.1.1",
+    "@angular-eslint/eslint-plugin": "^20.1.1",
+    "@angular-eslint/eslint-plugin-template": "^20.1.1",
+    "@angular-eslint/schematics": "^20.1.1",
+    "@angular-eslint/template-parser": "^20.1.1",
     "@angular/build": "^20.1.4",
     "@angular/cli": "^20.1.4",
     "@angular/compiler-cli": "^20.1.0",
     "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "@typescript-eslint/utils": "^8.39.0",
+    "angular-eslint": "^20.1.1",
+    "depcheck": "^1.4.7",
+    "eslint": "8.57.1",
+    "eslint-config-prettier": "^9.0.0",
     "jasmine-core": "~5.8.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.0.0",
+    "sonar-scanner": "^3.1.0",
     "typescript": "~5.8.2"
   }
 }

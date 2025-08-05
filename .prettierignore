@@ -1,0 +1,6 @@
+# Ignorar archivos para Prettier
+dist/
+coverage/
+node_modules/
+*.min.js
+*.min.css
